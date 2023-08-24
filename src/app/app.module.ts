@@ -7,11 +7,13 @@ import { AlianzaComponent } from './alianza/alianza.component';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
+import { MensajeDialogComponent } from './mensaje-dialog/mensaje-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlianzaComponent
+    AlianzaComponent,
+    MensajeDialogComponent
   ],
   imports: [
     BrowserModule,

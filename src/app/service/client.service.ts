@@ -33,8 +33,16 @@ export class ClientService {
     return this.http.put<Client>(url, updatedClient);
   }
 
-  deleteClient(id: number): Observable<void> {
-    const url = `${this.apiUrl}/${id}`;
+  deleteClient(document: string): Observable<void> {
+    const url = `${this.apiUrl}/${document}`;
     return this.http.delete<void>(url);
+  }
+
+  checkIfClientExists(client:Client):Observable<any>{
+    return this.http.post<any>(this.apiUrl+"/checkUsuario",client);
+  }
+
+  checkIfClientEmailExists(client:Client):Observable<any>{
+    return this.http.post<any>(this.apiUrl+"/checkEmail",client);
   }
 }

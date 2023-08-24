@@ -3,6 +3,7 @@ import {FormBuilder, Validators, UntypedFormGroup, UntypedFormControl} from '@an
 import { MatTableDataSource } from '@angular/material/table';
 import { Client } from '../interfaces/client.model';
 import { ClientService } from '../service/client.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-alianza',
@@ -23,7 +24,7 @@ export class AlianzaComponent implements OnInit{
 
 
 
-  constructor (private fb: FormBuilder,private clientService: ClientService) { 
+  constructor (private dialog:MatDialog,private fb: FormBuilder,private clientService: ClientService) { 
     this.clientForm = new UntypedFormGroup({
       name: new UntypedFormControl('', Validators.compose([Validators.required])),
       userName: new UntypedFormControl('', Validators.compose([])),
@@ -64,6 +65,18 @@ export class AlianzaComponent implements OnInit{
 
   createClient():void{
     let client:Client=this.clientForm.value;
+
+    let mensaje:any;
+    let mensaje2:any;
+
+    this.clientService.checkIfClientExists(client).subscribe(res=>{
+      mensaje=res;
+      console.log(mensaje)
+    });
+    this.clientService.checkIfClientEmailExists(client).subscribe(e=>{
+      mensaje2=e;
+      console.log(mensaje2);
+    });
     this.clientService.createClient(client).subscribe(res=>{
       console.log(res)
     });
